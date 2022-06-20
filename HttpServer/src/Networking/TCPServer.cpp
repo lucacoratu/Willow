@@ -12,7 +12,16 @@
 #include <sys/epoll.h>
 #include <errno.h>
 
+#include "ServerExceptions.h"
+
 namespace Willow{
+    //Constructors / Destructors
+    TCPServer::TCPServer()
+        : m_IpAddress("localhost"), m_Port(0)
+    {
+
+    }
+
     TCPServer::TCPServer(const char* ipAddress, int port)
         : m_IpAddress(ipAddress), m_Port(port)
     {
@@ -27,6 +36,14 @@ namespace Willow{
     //Protected functions
     void TCPServer::SendToClient(uint64_t clientSocket, std::string message){
         send(clientSocket, message.data(), message.size(), 0);
+    }
+
+    //Setters
+    void TCPServer::SetPort(unsigned int port){
+        if(port > 65000)
+            throw ServerException("Cannot set the port bigger than 65000", 1);
+
+        this->m_Port = port;
     }
 
     //Public functions

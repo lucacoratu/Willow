@@ -92,7 +92,7 @@ namespace Willow {
 			throw HttpException("Invalid HTTP format!", 5);
 
 		this->m_HttpMethod = firstLine.substr(0, space0);
-		this->m_Location = firstLine.substr(space0 + 1, space1 - space0);
+		this->m_Location = firstLine.substr(space0 + 1, space1 - space0 - 1);
 		this->m_HttpVersion = firstLine.substr(space1 + 1);
 
 		//Go through every line and save the data into the class members

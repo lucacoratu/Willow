@@ -35,10 +35,14 @@ namespace Willow
         //Handle message received from client
         virtual void OnMessageReceived(uint64_t clientSocket, std::string message) = 0;
 
+        //Handle sending a message to the client
         void SendToClient(uint64_t clientSocket, std::string message);
 
+        //Setters for the derived class
+        void SetPort(unsigned int port);
     public:
         //Constructors / Destructors
+        TCPServer();
         TCPServer(const char* ipAddress, int port);
         virtual ~TCPServer();
 
